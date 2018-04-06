@@ -8,7 +8,8 @@ var Enemy = function () {
     this.sprite = 'images/enemy-bug.png';
     this.x = -150;
     this.y = randomEnemyPosition();
-    this.speed = getRandomNumberBetween(3,7);
+    this.speed = getRandomNumberBetween(3, 7);
+
 };
 
 // Update the enemy's position, required method for game
@@ -17,11 +18,16 @@ Enemy.prototype.update = function (dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-   
+
     this.x += this.speed;
-    
-    if (this.x > 600){
-        this.speed = getRandomNumberBetween(3,7);
+    if (player.getPlayer().x >= this.x - 30 && player.getPlayer().x < this.x + 30 && player.getPlayer().y === this.y) {
+        console.log("collision");
+        player.getPlayer().x = 202;
+        player.getPlayer().y = 390;
+    }
+
+    if (this.x > 600) {
+        this.speed = getRandomNumberBetween(3, 7);
         this.x = -150;
         this.y = randomEnemyPosition();
         console.log(this.speed);
@@ -44,26 +50,29 @@ class Player {
         this.y = 390;
     }
 
-    update() {
-
+    update() {          
+        
     }
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
     handleInput(key) {
-        if (key === "up"){
-            this.y-= 83;
+        if (key === "up") {
+            this.y -= 83;
             console.log("up");
-        }else if (key === "down"){
-            this.y+= 83;
+        } else if (key === "down") {
+            this.y += 83;
             console.log("down");
-        }else if (key === "left"){
-            this.x-= 101;
+        } else if (key === "left") {
+            this.x -= 101;
             console.log("left");
-        }else if (key === "right"){
-            this.x+= 101;
+        } else if (key === "right") {
+            this.x += 101;
             console.log("right");
         }
+    }
+    getPlayer() {
+        return this;
     }
 }
 
@@ -90,18 +99,18 @@ document.addEventListener('keyup', function (e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-function randomEnemyPosition(){
-    let x= getRandomNumberBetween(1,3);
-    if(x===1){
-        return 60;
-    }else if(x===2){
-        return 145;
-    }else{
-        return 225;
+function randomEnemyPosition() {
+    let x = getRandomNumberBetween(1, 3);
+    if (x === 1) {
+        return 58;
+    } else if (x === 2) {
+        return 141;
+    } else {
+        return 224;
     }
 }
 
 
 function getRandomNumberBetween(min, max) {
-   return Math.floor(Math.random() * max) + min;
+    return Math.floor(Math.random() * max) + min;
 }
