@@ -39,17 +39,31 @@ Enemy.prototype.render = function () {
 // a handleInput() method.
 class Player {
     constructor() {
-
+        this.sprite = 'images/char-boy.png';
+        this.x = 202;
+        this.y = 390;
     }
 
     update() {
 
     }
     render() {
-
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
-    handleInput() {
-
+    handleInput(key) {
+        if (key === "up"){
+            this.y-= 83;
+            console.log("up");
+        }else if (key === "down"){
+            this.y+= 83;
+            console.log("down");
+        }else if (key === "left"){
+            this.x-= 101;
+            console.log("left");
+        }else if (key === "right"){
+            this.x+= 101;
+            console.log("right");
+        }
     }
 }
 
