@@ -7,8 +7,8 @@ var Enemy = function () {
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.x = -150;
-    this.y = 225;
-    this.speed = 5;
+    this.y = randomEnemyPosition();
+    this.speed = getRandomNumberBetween(3,7);
 };
 
 // Update the enemy's position, required method for game
@@ -19,10 +19,12 @@ Enemy.prototype.update = function (dt) {
     // all computers.
    
     this.x += this.speed;
+    
     if (this.x > 600){
-        this.speed = getRandomNumberOf(12);
+        this.speed = getRandomNumberBetween(3,7);
         this.x = -150;
         this.y = randomEnemyPosition();
+        console.log(this.speed);
     }
     return dt * this.x;
 };
@@ -75,7 +77,7 @@ document.addEventListener('keyup', function (e) {
 });
 
 function randomEnemyPosition(){
-    let x= getRandomNumberOf(3);
+    let x= getRandomNumberBetween(1,3);
     if(x===1){
         return 60;
     }else if(x===2){
@@ -85,6 +87,7 @@ function randomEnemyPosition(){
     }
 }
 
-function getRandomNumberOf(x) {
-   return Math.floor(Math.random() * x) + 1;
+
+function getRandomNumberBetween(min, max) {
+   return Math.floor(Math.random() * max) + min;
 }
