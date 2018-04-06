@@ -50,8 +50,14 @@ class Player {
         this.y = 390;
     }
 
-    update() {          
-        
+    update() {
+        if (this.y < 58) {
+            console.log("win");
+            setTimeout(() => {
+                this.x = 202;
+                this.y = 390;
+            }, 200);
+        }
     }
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
