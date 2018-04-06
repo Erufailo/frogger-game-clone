@@ -51,12 +51,19 @@ class Player {
     }
 
     update() {
-        if (this.y < 58) {
+        if (this.y < 58) {//win condition
             console.log("win");
             setTimeout(() => {
                 this.x = 202;
                 this.y = 390;
-            }, 200);
+            }, 100);
+        }
+        if (this.x>404){//restrain player to canvas
+            this.x= 404;
+        }else if (this.x<0){
+            this.x = 0;
+        }else if (this.y>390){
+            this.y = 390;
         }
     }
     render() {
