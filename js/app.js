@@ -58,11 +58,11 @@ class Player {
                 this.y = 390;
             }, 100);
         }
-        if (this.x>404){//restrain player to canvas
-            this.x= 404;
-        }else if (this.x<0){
+        if (this.x > 404) {//restrain player to canvas
+            this.x = 404;
+        } else if (this.x < 0) {
             this.x = 0;
-        }else if (this.y>390){
+        } else if (this.y > 390) {
             this.y = 390;
         }
     }
@@ -94,9 +94,10 @@ class Player {
 // Place the player object in a variable called player
 let player = new Player();
 let allEnemies = [];
-allEnemies.push(new Enemy());
-allEnemies.push(new Enemy());
-allEnemies.push(new Enemy());
+let numberOfEnemies = 3;
+for (let i = 0; i < numberOfEnemies; i++) {
+    allEnemies.push(new Enemy());
+}
 
 
 // This listens for key presses and sends the keys to your
