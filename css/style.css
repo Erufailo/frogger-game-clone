@@ -15,7 +15,7 @@ html, body {
 }
 
 body {
-    background: #dadaff ;    
+    background: #dadaff;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -41,12 +41,14 @@ body {
     display: flex;
     list-style: none;
 }
-img{
+
+img {
     width: 15px;
     height: 15px;
 }
-canvas{
+
+canvas {
     margin-top: 320px;
-    padding:0;
+    padding: 0;
     position: absolute;
 }
