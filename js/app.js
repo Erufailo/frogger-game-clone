@@ -133,10 +133,12 @@ const TILE_HEIGHT = 83;
 let player = new Player();
 let allEnemies = [];
 let numberOfEnemies = 3;
+let timerID;
 for (let i = 0; i < numberOfEnemies; i++) {
     allEnemies.push(new Enemy());
 }
 let collectible = new Collectible();
+timerID = setInterval(timer, 1000);
 
 
 // This listens for key presses and sends the keys to your
@@ -176,4 +178,18 @@ function randomEnemyPosition() {
 
 function getRandomNumberBetween(min, max) {
     return Math.floor(Math.random() * max) + min;
+}
+
+let s = 0; //seconds
+let m = 0; //minutes
+function timer() {
+    ++s;
+    m = Math.floor(s / 60);
+    let timer = document.querySelector(".timer");
+    if (s % 60 < 10) {// checks if a second is one or two digits
+        timer.textContent = "Elapsed Time: " + m + ":0" + s % 60;
+    } else {
+        timer.textContent = "Elapsed Time: " + m + ":" + s % 60;
+    }
+
 }
