@@ -90,13 +90,13 @@ class Player {
 }
 class Collectible {
     constructor() {
-        this.x = (getRandomNumberBetween(1,5)-1) * TILE_WIDTH;
-        this.y = getRandomNumberBetween(1,3) * TILE_HEIGHT;
+        this.x = (getRandomNumberBetween(1, 5) - 1) * TILE_WIDTH;
+        this.y = getRandomNumberBetween(1, 3) * TILE_HEIGHT;
         this.sprite = "images/Gem-Blue1.png";
         this.collected = false;
     }
     render() {
-        if (!this.collected){
+        if (!this.collected) {
             ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
         }
     }
@@ -125,15 +125,25 @@ let collectible = new Collectible();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
+document.addEventListener('keydown', function (e) {
+
+    if ([37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
+
+});
 document.addEventListener('keyup', function (e) {
+
     var allowedKeys = {
         37: 'left',
         38: 'up',
         39: 'right',
         40: 'down'
     };
-
-    player.handleInput(allowedKeys[e.keyCode]);
+    if ([37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+        player.handleInput(allowedKeys[e.keyCode]);
+    }
 });
 
 function randomEnemyPosition() {
