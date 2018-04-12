@@ -93,17 +93,25 @@ class Collectible {
         this.x = (getRandomNumberBetween(1, 5) - 1) * TILE_WIDTH;
         this.y = getRandomNumberBetween(1, 3) * TILE_HEIGHT;
         this.sprite = "images/Gem-Blue1.png";
-        this.collected = false;
+        this.collected = 0;
     }
     render() {
-        if (!this.collected) {
+        if (this.collected < 3) {
             ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
         }
     }
     update() {
         if (player.getPlayer().x === this.x && player.getPlayer().y + 25 === this.y) {
             console.log("gem collision");
-            this.collected = true;
+            this.collected++;
+            if (this.collected <= 3) {
+                this.x = (getRandomNumberBetween(1, 5) - 1) * TILE_WIDTH;
+                this.y = getRandomNumberBetween(1, 3) * TILE_HEIGHT;
+                document.querySelector(".gems").textContent = "Collected Gems: " + this.collected + "/3";
+            }else {
+                this.x =-100;
+                this.y =-100;
+            }
         }
     }
 }
