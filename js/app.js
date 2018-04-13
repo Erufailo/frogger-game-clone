@@ -253,4 +253,6 @@ window.addEventListener("click", windowOnClick);
 function startGame() {
     play = true;
     timerID = setInterval(timer, 1000);
+    document.querySelector(".instructions").classList.add("invisible");
+
 }

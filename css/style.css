@@ -118,3 +118,15 @@ canvas {
     cursor: pointer;
     margin-top: 25px;
 }
+
+.instructions {
+    z-index: 1;
+    position: relative;
+    width: 500px;
+    height: 250px;
+    margin-top: 110px;
+    
+}
+.invisible{
+    visibility: hidden;
+}
