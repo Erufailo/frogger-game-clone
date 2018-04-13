@@ -69,7 +69,7 @@ class Player {
                     this.y = 390;
                 }, 100);
                 createModal(true);
-                play=false;
+                play = false;
             }
         } else {
             if (this.y < 58) {
@@ -92,18 +92,20 @@ class Player {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
     handleInput(key) {
-        if (key === "up") {
-            this.y -= 83;
-            console.log("up");
-        } else if (key === "down") {
-            this.y += 83;
-            console.log("down");
-        } else if (key === "left") {
-            this.x -= 101;
-            console.log("left");
-        } else if (key === "right") {
-            this.x += 101;
-            console.log("right");
+        if (play === true) {
+            if (key === "up") {
+                this.y -= 83;
+                console.log("up");
+            } else if (key === "down") {
+                this.y += 83;
+                console.log("down");
+            } else if (key === "left") {
+                this.x -= 101;
+                console.log("left");
+            } else if (key === "right") {
+                this.x += 101;
+                console.log("right");
+            }
         }
     }
     getPlayer() {
@@ -149,16 +151,17 @@ class Collectible {
 // Place the player object in a variable called player
 const TILE_WIDTH = 101;
 const TILE_HEIGHT = 83;
-let player = new Player();
+let player;
 let allEnemies = [];
 let numberOfEnemies = 3;
 let timerID;
-let play= true;
+let play = false;
+let collectible;
+player = new Player();
+collectible = new Collectible();
 for (let i = 0; i < numberOfEnemies; i++) {
     allEnemies.push(new Enemy());
 }
-let collectible = new Collectible();
-timerID = setInterval(timer, 1000);
 
 
 // This listens for key presses and sends the keys to your
@@ -178,6 +181,10 @@ document.addEventListener('keyup', function (e) {
         39: 'right',
         40: 'down'
     };
+    if (e.keyCode === 32) {
+        startGame();
+    }
+
     if ([37, 38, 39, 40].indexOf(e.keyCode) > -1) {
         e.preventDefault();
         player.handleInput(allowedKeys[e.keyCode]);
@@ -241,3 +248,8 @@ function windowOnClick(event) {
 
 closeButton.addEventListener("click", toggleModal);
 window.addEventListener("click", windowOnClick);
+
+function startGame() {
+    play = true;
+    timerID = setInterval(timer, 1000);
+}
