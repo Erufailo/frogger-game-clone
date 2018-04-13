@@ -30,6 +30,7 @@ Enemy.prototype.update = function (dt) {
             heart.removeAttribute("src");
             heart.setAttribute("src", "images/heart-empty.png");
             player.getPlayer().collisions -= 1;
+            player.getPlayer().lives-=1;
         }
     }
 
@@ -56,6 +57,7 @@ class Player {
         this.x = 202;
         this.y = 390;
         this.collisions = 2;
+        this.lives = 3;
     }
 
     update() {
@@ -65,6 +67,7 @@ class Player {
                 this.x = 202;
                 this.y = 390;
             }, 100);
+            createModal(true);
         }
         if (this.x > 404) {//restrain player to canvas
             this.x = 404;
@@ -72,6 +75,10 @@ class Player {
             this.x = 0;
         } else if (this.y > 390) {
             this.y = 390;
+        }
+        if (this.lives === 0) { // lose
+            console.log("lose");
+            createModal(false);
         }
     }
     render() {
@@ -116,6 +123,8 @@ class Collectible {
                 this.x = (getRandomNumberBetween(1, 5) - 1) * TILE_WIDTH;
                 this.y = getRandomNumberBetween(1, 3) * TILE_HEIGHT;
                 document.querySelector(".gems").textContent = "Collected Gems: " + this.collected + "/3";
+                
+
             } else {
                 this.x = -100;
                 this.y = -100;
@@ -193,3 +202,31 @@ function timer() {
     }
 
 }
+
+function createModal(win){
+    const heading = document.querySelector(".modal-heading");
+    const stats = document.querySelector(".stats");
+    if(win){
+        heading.textContent = "Congratulations! You Won!!"
+    }else{
+        heading.textContent = "You lost! Better luck next time!"
+    }
+    toggleModal();
+}
+
+//Modal code from https://sabe.io/tutorials/how-to-create-modal-popup-box
+const modal = document.querySelector(".modal");
+const closeButton = document.querySelector(".close-button");
+
+function toggleModal() {
+    modal.classList.toggle("show-modal");
+}
+
+function windowOnClick(event) {
+    if (event.target === modal) {
+        toggleModal();
+    }
+}
+
+closeButton.addEventListener("click", toggleModal);
+window.addEventListener("click", windowOnClick);

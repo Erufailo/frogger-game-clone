@@ -52,3 +52,69 @@ canvas {
     padding: 0;
     position: absolute;
 }
+
+.modal {
+    z-index: 1;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(241, 241, 241);
+    padding: 1rem 1.5rem;
+    width: 35rem;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+.close-button {
+    float: right;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+}
+
+.close-button:hover {
+    background-color: darkgray;
+}
+
+.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.modal-heading {
+    letter-spacing: 2px;
+}
+
+.stats {
+    color: rgb(143, 143, 143);
+    margin-top: 30px;
+}
+
+.new-game {
+    background: rgb(75, 189, 0);
+    color: #fff;
+    border: 0;
+    padding: 1em 2em;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 25px;
+}
