@@ -30,7 +30,7 @@ Enemy.prototype.update = function (dt) {
             heart.removeAttribute("src");
             heart.setAttribute("src", "images/heart-empty.png");
             player.getPlayer().collisions -= 1;
-            player.getPlayer().lives-=1;
+            player.getPlayer().lives -= 1;
         }
     }
 
@@ -61,13 +61,20 @@ class Player {
     }
 
     update() {
-        if (this.y < 58) {//win condition
-            console.log("win");
-            setTimeout(() => {
-                this.x = 202;
-                this.y = 390;
-            }, 100);
-            createModal(true);
+        if (collectible.getCollectibles() === 3) {
+            if (this.y < 58) {//win condition
+                console.log("win");
+                setTimeout(() => {
+                    this.x = 202;
+                    this.y = 390;
+                }, 100);
+                createModal(true);
+                play=false;
+            }
+        } else {
+            if (this.y < 58) {
+                this.y = 58;
+            }
         }
         if (this.x > 404) {//restrain player to canvas
             this.x = 404;
@@ -123,13 +130,16 @@ class Collectible {
                 this.x = (getRandomNumberBetween(1, 5) - 1) * TILE_WIDTH;
                 this.y = getRandomNumberBetween(1, 3) * TILE_HEIGHT;
                 document.querySelector(".gems").textContent = "Collected Gems: " + this.collected + "/3";
-                
+
 
             } else {
                 this.x = -100;
                 this.y = -100;
             }
         }
+    }
+    getCollectibles() {
+        return this.collected;
     }
 }
 
@@ -143,6 +153,7 @@ let player = new Player();
 let allEnemies = [];
 let numberOfEnemies = 3;
 let timerID;
+let play= true;
 for (let i = 0; i < numberOfEnemies; i++) {
     allEnemies.push(new Enemy());
 }
@@ -203,12 +214,12 @@ function timer() {
 
 }
 
-function createModal(win){
+function createModal(win) {
     const heading = document.querySelector(".modal-heading");
     const stats = document.querySelector(".stats");
-    if(win){
+    if (win) {
         heading.textContent = "Congratulations! You Won!!"
-    }else{
+    } else {
         heading.textContent = "You lost! Better luck next time!"
     }
     toggleModal();

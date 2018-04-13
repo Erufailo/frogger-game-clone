@@ -91,7 +91,7 @@ var Engine = (function (global) {
      * render methods.
      */
     function updateEntities(dt) {
-        if (player.getPlayer().lives !== 0) {
+        if (player.getPlayer().lives !== 0 && play=== true) {
             allEnemies.forEach(function (enemy) {
                 enemy.update(dt);
             });
