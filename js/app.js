@@ -9,7 +9,7 @@ var Enemy = function () {
     this.x = -150;
     this.y = randomEnemyPosition();
     this.speed = getRandomNumberBetween(3, 7);
-    
+
 
 };
 
@@ -25,11 +25,11 @@ Enemy.prototype.update = function (dt) {
         console.log("collision");
         player.getPlayer().x = 202;
         player.getPlayer().y = 390;
-        if (player.getPlayer().collisions>=0) {
+        if (player.getPlayer().collisions >= 0) {
             const heart = document.querySelectorAll(".heart")[player.getPlayer().collisions];
             heart.removeAttribute("src");
             heart.setAttribute("src", "images/heart-empty.png");
-            player.getPlayer().collisions-=1;
+            player.getPlayer().collisions -= 1;
         }
     }
 
