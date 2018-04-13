@@ -64,7 +64,7 @@ var Engine = (function (global) {
      * game loop.
      */
     function init() {
-        reset();
+        //reset();
         lastTime = Date.now();
         main();
     }
@@ -91,7 +91,7 @@ var Engine = (function (global) {
      * render methods.
      */
     function updateEntities(dt) {
-        if (player.getPlayer().lives !== 0 && play=== true) {
+        if (player.getPlayer().lives !== 0 && play === true) {
             allEnemies.forEach(function (enemy) {
                 enemy.update(dt);
             });
@@ -167,9 +167,27 @@ var Engine = (function (global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
-    }
+        s = 0;
+        t = 0;
+        play = true;
+        document.querySelector(".timer").textContent = "Elapsed Time: 0:00";
+        document.querySelector(".gems").textContent = "Collected Gems: 0/3";
+        const hearts = document.querySelectorAll(".heart");
+        for (let heart of hearts) {
+            heart.removeAttribute("src");
+            heart.setAttribute("src", "images/heart-full.png");
+        }
 
+        allEnemies.forEach(function (enemy) {
+            enemy.reset();
+        });
+        player.reset();
+        collectible.reset();
+        timerID = setInterval(timer, 1000);
+        toggleModal();
+    }
+    const resetButton = document.querySelector(".new-game");
+    resetButton.addEventListener("click", reset);
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.

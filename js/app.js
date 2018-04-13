@@ -48,6 +48,12 @@ Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+Enemy.prototype.reset = function() {
+    this.x = -150;
+    this.y = randomEnemyPosition();
+    this.speed = getRandomNumberBetween(3, 7);
+};
+
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
@@ -86,6 +92,7 @@ class Player {
         if (this.lives === 0) { // lose
             console.log("lose");
             createModal(false);
+            play=false;
         }
     }
     render() {
@@ -110,6 +117,12 @@ class Player {
     }
     getPlayer() {
         return this;
+    }
+    reset() {
+        this.x = 202;
+        this.y = 390;
+        this.collisions = 2;
+        this.lives = 3;
     }
 }
 class Collectible {
@@ -142,6 +155,9 @@ class Collectible {
     }
     getCollectibles() {
         return this.collected;
+    }
+    reset() {
+        this.collected = 0;
     }
 }
 
@@ -254,5 +270,5 @@ function startGame() {
     play = true;
     timerID = setInterval(timer, 1000);
     document.querySelector(".instructions").classList.add("invisible");
-
 }
+
