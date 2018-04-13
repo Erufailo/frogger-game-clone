@@ -230,6 +230,7 @@ function createModal(win) {
         heading.textContent = "You lost! Better luck next time!"
     }
     toggleModal();
+    clearInterval(timerID);
 }
 
 //Modal code from https://sabe.io/tutorials/how-to-create-modal-popup-box
