@@ -108,6 +108,7 @@ canvas {
     color: rgb(143, 143, 143);
     margin-top: 30px;
 }
+
 .info {
     color: rgb(117, 117, 117);
     margin-top: 30px;
@@ -129,8 +130,8 @@ canvas {
     width: 500px;
     height: 250px;
     margin-top: 110px;
-    
 }
-.invisible{
+
+.invisible {
     visibility: hidden;
 }
