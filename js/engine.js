@@ -188,6 +188,13 @@ var Engine = (function (global) {
     }
     const resetButton = document.querySelector(".new-game");
     resetButton.addEventListener("click", reset);
+    document.addEventListener("keypress", function (e) {
+        var key = e.which || e.keyCode;
+        console.log(key);
+        if (key === 13 && play===false &&!firstGame) {
+            reset();
+        }
+    });
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.

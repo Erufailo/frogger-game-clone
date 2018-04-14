@@ -201,8 +201,6 @@ document.addEventListener('keyup', function (e) {
         startGame();
         firstGame = false;
     }
-
-
     if ([37, 38, 39, 40].indexOf(e.keyCode) > -1) {
         e.preventDefault();
         player.handleInput(allowedKeys[e.keyCode]);
