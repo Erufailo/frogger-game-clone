@@ -38,7 +38,6 @@ Enemy.prototype.update = function (dt) {
         this.speed = getRandomNumberBetween(3, 7);
         this.x = -150;
         this.y = randomEnemyPosition();
-        console.log(this.speed);
     }
     return dt * this.x;
 };
@@ -67,7 +66,7 @@ class Player {
     }
 
     update() {
-        if (collectible.getCollectibles() === 3) {
+        if (collectible.getCollectibles() >= 3) {
             if (this.y < 58) {//win condition
                 console.log("win");
                 setTimeout(() => {
@@ -139,15 +138,12 @@ class Collectible {
     }
     update() {
         if (player.getPlayer().x === this.x && player.getPlayer().y + 25 === this.y) {
-            console.log("gem collision: " +this.collected);
-
             this.collected++;
-            if (this.collected <= 3) {
+            document.querySelector(".gems").textContent = "Collected Gems: " + this.collected + "/3";
+            console.log("gem collision: " + this.collected);
+            if (this.collected < 3) {
                 this.x = (getRandomNumberBetween(1, 5) - 1) * TILE_WIDTH;
                 this.y = getRandomNumberBetween(1, 3) * TILE_HEIGHT;
-                document.querySelector(".gems").textContent = "Collected Gems: " + this.collected + "/3";
-
-
             } else {
                 this.x = -100;
                 this.y = -100;
@@ -170,10 +166,10 @@ class Collectible {
 // Place the player object in a variable called player
 const TILE_WIDTH = 101;
 const TILE_HEIGHT = 83;
-let firstGame =true;
+let firstGame = true;
 let player;
 let allEnemies = [];
-let numberOfEnemies = 3;
+let numberOfEnemies = 1;
 let timerID;
 let play = false;
 let collectible;
@@ -201,11 +197,11 @@ document.addEventListener('keyup', function (e) {
         39: 'right',
         40: 'down'
     };
-    if (e.keyCode === 32 && play===false && firstGame) {
+    if (e.keyCode === 32 && play === false && firstGame) {
         startGame();
-        firstGame=false;
+        firstGame = false;
     }
-    
+
 
     if ([37, 38, 39, 40].indexOf(e.keyCode) > -1) {
         e.preventDefault();
