@@ -110,6 +110,9 @@ class Player {
     getPlayer() {
         return this;
     }
+    getLives() {
+        return this.lives;
+    }
     reset() {
         this.x = 202;
         this.y = 390;
@@ -232,11 +235,19 @@ function timer() {
 function createModal(win) {
     const heading = document.querySelector(".modal-heading");
     const stats = document.querySelector(".stats");
+    const info = document.querySelector(".info");
     if (win) {
         heading.textContent = "Congratulations! You Won!!"
+        if (s % 60 < 10) {
+            stats.textContent = "You won with " + player.getLives() + " lives! Time: " + m + ":0" + s % 60;
+        } else {
+            stats.textContent = "You won with " + player.getLives() + " lives! Time: " + m + ":" + s % 60;
+        }
+        
     } else {
         heading.textContent = "You lost! Better luck next time!"
     }
+    info.textContent=  "Press Enter To Play Again!";
     toggleModal();
     clearInterval(timerID);
 }
