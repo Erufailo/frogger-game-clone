@@ -247,6 +247,7 @@ function createModal(win) {
         }
 
     } else {
+        stats.textContent = "";
         heading.textContent = "You lost! Better luck next time!"
     }
     info.textContent = "Press Enter To Play Again!";
