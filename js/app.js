@@ -48,7 +48,7 @@ Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Enemy.prototype.reset = function() {
+Enemy.prototype.reset = function () {
     this.x = -150;
     this.y = randomEnemyPosition();
     this.speed = getRandomNumberBetween(3, 7);
@@ -92,7 +92,7 @@ class Player {
         if (this.lives === 0) { // lose
             console.log("lose");
             createModal(false);
-            play=false;
+            play = false;
         }
     }
     render() {
@@ -139,7 +139,8 @@ class Collectible {
     }
     update() {
         if (player.getPlayer().x === this.x && player.getPlayer().y + 25 === this.y) {
-            console.log("gem collision");
+            console.log("gem collision: " +this.collected);
+
             this.collected++;
             if (this.collected <= 3) {
                 this.x = (getRandomNumberBetween(1, 5) - 1) * TILE_WIDTH;
@@ -158,6 +159,8 @@ class Collectible {
     }
     reset() {
         this.collected = 0;
+        this.x = (getRandomNumberBetween(1, 5) - 1) * TILE_WIDTH;
+        this.y = getRandomNumberBetween(1, 3) * TILE_HEIGHT;
     }
 }
 
@@ -167,6 +170,7 @@ class Collectible {
 // Place the player object in a variable called player
 const TILE_WIDTH = 101;
 const TILE_HEIGHT = 83;
+let firstGame =true;
 let player;
 let allEnemies = [];
 let numberOfEnemies = 3;
@@ -197,9 +201,11 @@ document.addEventListener('keyup', function (e) {
         39: 'right',
         40: 'down'
     };
-    if (e.keyCode === 32) {
+    if (e.keyCode === 32 && play===false && firstGame) {
         startGame();
+        firstGame=false;
     }
+    
 
     if ([37, 38, 39, 40].indexOf(e.keyCode) > -1) {
         e.preventDefault();
