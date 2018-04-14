@@ -190,7 +190,6 @@ var Engine = (function (global) {
     resetButton.addEventListener("click", reset);
     document.addEventListener("keypress", function (e) {
         var key = e.which || e.keyCode;
-        console.log(key);
         if (key === 13 && play===false &&!firstGame) {
             reset();
         }

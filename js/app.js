@@ -22,7 +22,6 @@ Enemy.prototype.update = function (dt) {
 
     this.x += this.speed;
     if (player.getPlayer().x >= this.x - 30 && player.getPlayer().x < this.x + 30 && player.getPlayer().y === this.y) {
-        console.log("collision");
         player.getPlayer().x = 202;
         player.getPlayer().y = 390;
         if (player.getPlayer().collisions >= 0) {
@@ -68,7 +67,6 @@ class Player {
     update() {
         if (collectible.getCollectibles() >= 3) {
             if (this.y < 58) {//win condition
-                console.log("win");
                 setTimeout(() => {
                     this.x = 202;
                     this.y = 390;
@@ -89,7 +87,6 @@ class Player {
             this.y = 390;
         }
         if (this.lives === 0) { // lose
-            console.log("lose");
             createModal(false);
             play = false;
         }
@@ -101,16 +98,12 @@ class Player {
         if (play === true) {
             if (key === "up") {
                 this.y -= 83;
-                console.log("up");
             } else if (key === "down") {
                 this.y += 83;
-                console.log("down");
             } else if (key === "left") {
                 this.x -= 101;
-                console.log("left");
             } else if (key === "right") {
                 this.x += 101;
-                console.log("right");
             }
         }
     }
@@ -140,7 +133,6 @@ class Collectible {
         if (player.getPlayer().x === this.x && player.getPlayer().y + 25 === this.y) {
             this.collected++;
             document.querySelector(".gems").textContent = "Collected Gems: " + this.collected + "/3";
-            console.log("gem collision: " + this.collected);
             if (this.collected < 3) {
                 this.x = (getRandomNumberBetween(1, 5) - 1) * TILE_WIDTH;
                 this.y = getRandomNumberBetween(1, 3) * TILE_HEIGHT;
@@ -169,7 +161,7 @@ const TILE_HEIGHT = 83;
 let firstGame = true;
 let player;
 let allEnemies = [];
-let numberOfEnemies = 1;
+let numberOfEnemies = 4;
 let timerID;
 let play = false;
 let collectible;
