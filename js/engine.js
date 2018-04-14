@@ -162,9 +162,8 @@ var Engine = (function (global) {
 
     }
 
-    /* This function does nothing but it could have been a good place to
-     * handle game reset states - maybe a new game menu or a game over screen
-     * those sorts of things. It's only called once by the init() method.
+    /* This function resets the state of the game 
+     * to the initial status and starts the game again
      */
     function reset() {
         s = 0;
@@ -186,14 +185,16 @@ var Engine = (function (global) {
         timerID = setInterval(timer, 1000);
         toggleModal();
     }
+    //the modal button or the enter key resets the game
     const resetButton = document.querySelector(".new-game");
     resetButton.addEventListener("click", reset);
     document.addEventListener("keypress", function (e) {
         var key = e.which || e.keyCode;
-        if (key === 13 && play===false &&!firstGame) {
+        if (key === 13 && play === false && !firstGame) {
             reset();
         }
     });
+
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.
